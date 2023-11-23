@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FSM.View.Pages.DetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:FSM.ViewModel"
+    Title=""
+    x:DataType="viewmodel:IssueDetailsViewModel">
+    <ScrollView>
+                <Grid RowDefinitions="Auto,Auto,*">
+            <BoxView
+                BackgroundColor="{StaticResource Primary}"
+                Grid.RowSpan="2"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"/>
+
+            <Border StrokeShape="RoundRectangle 80"
+                    Stroke="White"
+                    StrokeThickness="6"
+                    HeightRequest="160"
+                    WidthRequest="160"
+                    Margin="0,8,0,0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Image Aspect="AspectFill"
+                        HeightRequest="160"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Source="{Binding Issue.AssigneeAvatar}"
+                        WidthRequest="160"/>
+            </Border>
+
+            <Label Style="{StaticResource LargeLabel}" 
+                   Grid.Row="1"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   Text="{Binding Issue.IssueSummary}" 
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,8"/>
+
+            <VerticalStackLayout Grid.Row="2" Padding="10" Spacing="10">
+                 <!--Add this--> 
+                <Button Text="Show on Map" 
+                        Command="{Binding OpenMapCommand}"
+                        HorizontalOptions="Center" 
+                        WidthRequest="200" 
+                        Margin="8"
+                        Style="{StaticResource ButtonOutline}"/>
+
+                <Label Style="{StaticResource MediumLabel}" Text="{Binding Issue.Description}" />
+                <Label Style="{StaticResource SmallLabel}" Text="{Binding Issue.CreatedDate, StringFormat='Location: {0}'}" />
+                <Label Style="{StaticResource SmallLabel}" Text="{Binding Issue.TimeToResolution, StringFormat='Population: {0}'}" />
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+    <!--<ScrollView>
+        <Grid Margin="15,5,15,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            --><!---Header--><!--
+            <VerticalStackLayout Grid.Row="0">
+                <Border Padding="0"
+Margin="15,10,5,5"
+WidthRequest="340"
+BackgroundColor="{StaticResource Gray100}"
+Stroke="Gray"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 15">
+                    <Border.Shadow>
+
+                        <OnPlatform x:TypeArguments="Shadow">
+                            <On Platform="Android, WinUI">
+                                <Shadow Radius="25" Opacity="0.2"></Shadow>
+                            </On>
+                            <On Platform="iOS,MacCatalyst">
+                                <Shadow Radius="5" Opacity="0.2"></Shadow>
+                            </On>
+                        </OnPlatform>
+                    </Border.Shadow>
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+                        <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="10">
+                            <Border StrokeThickness="0"
+                    Padding="0"
+                    Margin="-1" HeightRequest="50" WidthRequest="50">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="25"/>
+                                </Border.StrokeShape>
+                                <Image Source="{Binding SelectedTicket.AssigneeAvatar}"
+                        Aspect="AspectFit"
+                        HeightRequest="50"
+                        WidthRequest="50"/>
+                            </Border>
+
+                            <StackLayout Orientation="Vertical" Padding="20,0,0,0" Spacing="5">
+                                <Label Text="{Binding SelectedTicket.IssueSummary}"
+                        FontSize="25"
+                        FontFamily="PoppinsRegular"
+                        TextColor="{StaticResource Primary}"
+                        HorizontalOptions="StartAndExpand"/>
+                                <Label Text="{Binding SelectedTicket.Assignee}"
+                        HorizontalOptions="FillAndExpand"
+                        FontFamily="RalewayMedium"
+                        FontSize="16"
+                        TextColor="Black"
+                               BackgroundColor="White"
+                        LineBreakMode="WordWrap"/>
+                            </StackLayout>
+                        </StackLayout>
+
+
+
+                        <StackLayout Grid.Row="1" Orientation="Horizontal" Padding="10">
+                            <Image Source="location.png" HeightRequest="20" WidthRequest="20"/>
+                            <Label  HorizontalOptions="FillAndExpand" Text="Los Angeles" FontSize="14" TextColor="Black" LineBreakMode="NoWrap"  Padding="10,0,10,0"/>
+                            <Image Source="phone.png" HeightRequest="20" WidthRequest="20"/>
+                            <Label  HorizontalOptions="FillAndExpand" Text="9988776655" FontSize="14" TextColor="Black" LineBreakMode="NoWrap"  Padding="10,0,0,0"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Orientation="Horizontal" Padding="10">
+                            <Image Source="created.png" HeightRequest="20" WidthRequest="20"/>
+                            <Label  HorizontalOptions="FillAndExpand" Text="{Binding SelectedTicket.CreatedDate}" FontSize="14" TextColor="Black" LineBreakMode="NoWrap"  Padding="10,0,10,0"/>
+                            <Image Source="Target.png" HeightRequest="20" WidthRequest="20"/>
+                            <Label  HorizontalOptions="FillAndExpand" Text="01/Nov/23 5:00 PM" FontSize="14" TextColor="Black" LineBreakMode="NoWrap"  Padding="10,0,0,0"/>
+                        </StackLayout>
+                        --><!--<StackLayout Grid.Row="3" Orientation="Horizontal" Padding="10">
+                    <ImageButton Source="accept.png" HeightRequest="50" WidthRequest="50" />
+                    <ImageButton Source="decline.png" HeightRequest="50" WidthRequest="50" Padding="50,0,0,0"/>
+                </StackLayout>--><!--
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference HomeView}}" CommandParameter="{Binding .}"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="1">
+                <Border Padding="0"
+Margin="15,10,5,5"
+WidthRequest="340"
+BackgroundColor="{StaticResource Gray100}"
+Stroke="Gray"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 15">
+                    <Border.Shadow>
+
+                        <OnPlatform x:TypeArguments="Shadow">
+                            <On Platform="Android, WinUI">
+                                <Shadow Radius="25" Opacity="0.2"></Shadow>
+                            </On>
+                            <On Platform="iOS,MacCatalyst">
+                                <Shadow Radius="5" Opacity="0.2"></Shadow>
+                            </On>
+                        </OnPlatform>
+                    </Border.Shadow>
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+                        <Label Grid.Row="0"  Padding="10" HorizontalOptions="FillAndExpand" Text="Description" FontSize="24" TextColor="Black" LineBreakMode="NoWrap"  />
+                        <Label Grid.Row="1"  Padding="10" HorizontalOptions="FillAndExpand" Text="{Binding SelectedTicket.Description}" FontSize="14" TextColor="Black" LineBreakMode="NoWrap" />
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference HomeView}}" CommandParameter="{Binding .}"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+            </VerticalStackLayout>
+            <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="10" x:Name="AcceptReject">
+                <Button  Text="Accept"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand"
+                FontFamily="RalewayMedium"
+                FontSize="20"
+                Background="{StaticResource PrimaryBrush}"
+                TextColor="White"
+                CornerRadius="30"
+                HeightRequest="55" Clicked="Accept_Clicked" />
+                <Button  Text="Reject"
+HorizontalOptions="FillAndExpand"
+VerticalOptions="StartAndExpand"
+FontFamily="RalewayMedium"
+FontSize="20"
+Background="{StaticResource Gray100Brush}"
+TextColor="Black"
+CornerRadius="30"
+HeightRequest="55" Clicked="Reject_Clicked"/>
+            </StackLayout>
+            <VerticalStackLayout Grid.Row="3" IsVisible="false" x:Name="Attachments">
+                <Border Padding="0"
+Margin="15,10,5,5"
+WidthRequest="340"
+BackgroundColor="{StaticResource Gray100}"
+Stroke="Gray"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 15">
+                    <Border.Shadow>
+
+                        <OnPlatform x:TypeArguments="Shadow">
+                            <On Platform="Android, WinUI">
+                                <Shadow Radius="25" Opacity="0.2"></Shadow>
+                            </On>
+                            <On Platform="iOS,MacCatalyst">
+                                <Shadow Radius="5" Opacity="0.2"></Shadow>
+                            </On>
+                        </OnPlatform>
+                    </Border.Shadow>
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+                        <Label Grid.Row="0"  Padding="10" HorizontalOptions="FillAndExpand" Text="Attachments" FontSize="24" TextColor="Black" LineBreakMode="NoWrap"  />
+
+                        <ListView Grid.Row="1" ItemsSource="{Binding SelectedTicket.Attachments}" HasUnevenRows="True" HeightRequest="150" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal" Padding="5">
+                                            <StackLayout VerticalOptions="CenterAndExpand" WidthRequest="200">
+                                                <Label Text="{Binding FileName}" TextColor="Black" FontSize="12" FontAttributes="Bold" />
+                                                <Label Text="{Binding Size}" FontSize="Small" />
+                                                <Label Text="{Binding DateAdded}" FontSize="Small" />
+                                                <Label Text="{Binding Author}" FontSize="Small" />
+                                            </StackLayout>
+                                            <Image Source="eye.png" HeightRequest="24" WidthRequest="24" 
+VerticalOptions="Center" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsImage}" >
+                                                <Image.GestureRecognizers >
+                                                    <TapGestureRecognizer Tapped="OnViewClicked" CommandParameter="{Binding .}" />
+                                                    --><!--<TapGestureRecognizer Command="{Binding BindingContext.ViewAttachmentCommand, Source={x:Reference DetailView}}"  CommandParameter="{Binding .}" />--><!--
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Image Source="downloads.png" HeightRequest="24" WidthRequest="24" 
+VerticalOptions="Center" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsDocument}" >
+                                                <Image.GestureRecognizers >
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.DownloadAttachmentCommand, Source={x:Reference DetailView}}"  CommandParameter="{Binding .}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                    --><!--<Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference HomeView}}" CommandParameter="{Binding .}"/>
+                    </Border.GestureRecognizers>--><!--
+                </Border>
+
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="4" IsVisible="false" x:Name="Comments">
+                <Border Padding="0"
+Margin="15,10,5,5"
+WidthRequest="340"
+BackgroundColor="{StaticResource Gray100}"
+Stroke="Gray"
+StrokeThickness="0"
+StrokeShape="RoundRectangle 15">
+                    <Border.Shadow>
+
+                        <OnPlatform x:TypeArguments="Shadow">
+                            <On Platform="Android, WinUI">
+                                <Shadow Radius="25" Opacity="0.2"></Shadow>
+                            </On>
+                            <On Platform="iOS,MacCatalyst">
+                                <Shadow Radius="5" Opacity="0.2"></Shadow>
+                            </On>
+                        </OnPlatform>
+                    </Border.Shadow>
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+                        <Label Grid.Row="0"  Padding="10" HorizontalOptions="FillAndExpand" Text="Comments" FontSize="24" TextColor="Black" LineBreakMode="NoWrap"  />
+
+                        <ListView Grid.Row="1" ItemsSource="{Binding SelectedTicket.Comments}" HasUnevenRows="True" HeightRequest="150" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal" Padding="5">
+                                            <StackLayout VerticalOptions="Center" WidthRequest="100">
+                                                <Label Text="{Binding Author}" FontSize="Small" />
+                                                <Label Text="{Binding DateAdded}" FontSize="Small" />
+                                            </StackLayout>
+                                            <Entry Text="{Binding TextContent}" Placeholder="Enter Comment here" WidthRequest="150" IsVisible="{Binding IsText}" />
+                                            <Image Source=" {Binding ImageSource}" WidthRequest="150" HeightRequest="150" IsVisible="{Binding IsImage}" >
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnViewCommentClicked" CommandParameter="{Binding .}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+
+                                            <Image Source="trash.png" HeightRequest="24" WidthRequest="24" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
+                                                <Image.GestureRecognizers>
+                                                    --><!--<TapGestureRecognizer Tapped="OnDeleteClicked" CommandParameter="{Binding Id}" />--><!--
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                    --><!--<Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.DetailCommand, Source={x:Reference HomeView}}" CommandParameter="{Binding .}"/>
+                    </Border.GestureRecognizers>--><!--
+                </Border>
+
+            </VerticalStackLayout>
+            <StackLayout Orientation="Vertical" Grid.Row="5" IsVisible="false" x:Name="Enroute" Padding="20" Margin="0,220,0,0"   HeightRequest="100" VerticalOptions="EndAndExpand" >
+
+                <Label Text="Click here if you are about to departure to the location" BackgroundColor="Transparent" FontSize="12"></Label>
+                <Button x:Name="btnEnroute"  Text="Enroute"
+FontFamily="RalewayMedium"
+FontSize="18"
+Background="{StaticResource PrimaryBrush}"
+TextColor="White"
+CornerRadius="20"
+HeightRequest="35"
+WidthRequest="150"
+Command="{Binding BindingContext.DetailCommand, Source={x:Reference DetailView}}" ZIndex="1" />
+            </StackLayout>
+
+        </Grid>
+    </ScrollView>-->
+</ContentPage>

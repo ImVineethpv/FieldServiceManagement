@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FSM.View.Pages.LoginPage"
+             Title="LoginPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="LightGray">
+    <VerticalStackLayout  HorizontalOptions="Center" VerticalOptions="End" Padding="25,50" BackgroundColor="LightGrey" >
+        <Label Text="Welcome" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" FontSize="26" Padding="25,15">
+        </Label>
+        <Label Text="Let's get to work" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" FontAttributes="Bold" FontSize="22" Padding="25,15">
+        </Label>
+        <Grid Padding="10">
+            <Frame Padding="40,0" CornerRadius="20" BorderColor="{StaticResource Primary}" HasShadow="False" BackgroundColor="White" HeightRequest="50" MinimumWidthRequest="500" >
+                <Entry x:Name="txtMobilenumber" Style="{StaticResource LoginEntryStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" TextChanged="OnEntryTextChanged" />
+            </Frame>
+        </Grid>
+        <Button  Text="Verify" VerticalOptions="Center" HorizontalOptions="Center"  BackgroundColor="{StaticResource Primary}" Margin="25" Padding="50,5" FontAttributes="Bold" FontSize="18" Pressed="OnVerify_Pressed" HeightRequest="50" CornerRadius="20" MinimumWidthRequest="500"/>
+    </VerticalStackLayout>
+    
+</ContentPage>

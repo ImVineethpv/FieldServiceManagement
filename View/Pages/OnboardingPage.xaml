@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FSM.ViewModel"
+             x:DataType="vm:OnboardingViewModel"
+             x:Class="FSM.View.Pages.OnboardingPage"
+             Title="OnboardingPage"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="*,auto" Padding="0,15">
+        <CarouselView x:Name="carouselView" ItemsSource="{Binding OnboardingSteps}" IndicatorView="OnBoardingIndicator" Grid.Row="0" PositionChanged="carouselView_PositionChanged">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="vm:OnBoardingModel">
+                    <Grid RowDefinitions="*,auto,auto">
+                        <Image Source="{Binding ImageSource}" Aspect="AspectFit" HeightRequest="300" Grid.Row="0"  />
+                        <Label Text="{Binding Title}" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" Margin="10,25" />
+                        <Label Text="{Binding Description}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="2" Margin="10,25"/>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <VerticalStackLayout Grid.Row="1">
+            <Label Text="Skip" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="18" Padding="25,15"  IsVisible="{Binding IsNotLastStep}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:OnboardingViewModel}}, Path=GoToLoginPageCommand}"
+></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
+            <Button Text="Get Started" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding IsLastStep}" BackgroundColor="Black" Margin="25" Padding="50,5" FontSize="18">
+                <Button.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:OnboardingViewModel}}, Path=GoToLoginPageCommand}" />
+                </Button.GestureRecognizers>
+            </Button>
+            <IndicatorView x:Name="OnBoardingIndicator" IndicatorsShape="Circle" IndicatorSize="15" SelectedIndicatorColor="Black" IndicatorColor="LightGrey" HorizontalOptions="Center" VerticalOptions="End" />
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

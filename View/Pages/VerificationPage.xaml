@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FSM.View.Pages.VerificationPage"
+             Title="VerificationPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="LightGray">
+    <Grid HorizontalOptions="Center" VerticalOptions="Start" Padding="10,30" ColumnDefinitions="*">
+        
+        <VerticalStackLayout Padding="10,100,0,0" VerticalOptions="Center" HorizontalOptions="Center">
+            <Label Text="Verify the 4 digit code send to "  TextColor="Black" FontAttributes="Bold" FontSize="22" Padding="25,15" />
+            <Label x:Name="lblMessage"  TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" FontSize="22"  />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10,30,0,0">
+                <Frame CornerRadius="25" BackgroundColor="White" HeightRequest="50" WidthRequest="50" Margin="5" Padding="20,0,0,0" InputTransparent="True">
+                    <Entry x:Name="value1" Style="{StaticResource VerificationEntryStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MaxLength="1" TextChanged="OnEntryTextChanged" />
+                </Frame>
+                <Frame CornerRadius="25" BackgroundColor="White" HeightRequest="50" WidthRequest="50" Margin="5" Padding="20,0,0,0" InputTransparent="True">
+                    <Entry x:Name="value2" Style="{StaticResource VerificationEntryStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MaxLength="1" TextChanged="OnEntryTextChanged" />
+                </Frame>
+                <Frame CornerRadius="25" BackgroundColor="White" HeightRequest="50" WidthRequest="50" Margin="5" Padding="20,0,0,0" InputTransparent="True">
+                    <Entry x:Name="value3" Style="{StaticResource VerificationEntryStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MaxLength="1" TextChanged="OnEntryTextChanged" />
+                </Frame>
+                <Frame CornerRadius="25" BackgroundColor="White" HeightRequest="50" WidthRequest="50" Margin="5" Padding="20,0,0,0" InputTransparent="True">
+                    <Entry x:Name="value4" Style="{StaticResource VerificationEntryStyle}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MaxLength="1" TextChanged="OnEntryTextChanged" />
+                </Frame>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10,30,0,0">
+                <Label x:Name="Timer"  TextColor="Black" FontSize="12" Padding="20,20" />
+                <Label Text="Resend code" x:Name="lblResentCode"  TextColor="Black" FontSize="12" HorizontalOptions="End" IsEnabled="False" Padding="20,20">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            <Button x:Name="btnVerify" Text="Verify" VerticalOptions="Center" HorizontalOptions="Center"  BackgroundColor="{StaticResource Primary}" Margin="25" Padding="50,5" FontAttributes="Bold" FontSize="18" Pressed="OnVerify_Pressed" HeightRequest="50" CornerRadius="20" MinimumWidthRequest="500" IsVisible="false "/>
+
+
+        </VerticalStackLayout>
+    </Grid>
+    
+</ContentPage>
