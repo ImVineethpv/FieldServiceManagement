@@ -14,14 +14,22 @@ public partial class IssuesViewModel : BaseViewModel
         Title = "Issues";
         this.issueService = issueService;
         this.connectivity = connectivity;
-        this.geolocation = geolocation;
+        this.geolocation = geolocation;        
     }
 
     [ObservableProperty]
     bool isRefreshing;
 
+    //public event EventHandler PageAppearing;
+
+    //// Invoke the event when the page is appearing
+    //public void OnPageAppearing()
+    //{
+    //    PageAppearing?.Invoke(this, EventArgs.Empty);
+    //}
+
     [RelayCommand]
-    async Task GetIssuesAsync()
+    public async Task GetIssuesAsync()
     {
         if (IsBusy)
             return;
@@ -37,12 +45,21 @@ public partial class IssuesViewModel : BaseViewModel
 
             IsBusy = true;
             var issues = await issueService.GetIssues();
+            //Shell.Current.Dispatcher.Dispatch(() =>
+            //Device.BeginInvokeOnMainThread(() =>
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (Issues.Count != 0)
+                    Issues.Clear();
 
-            if(Issues.Count != 0)
-                Issues.Clear();
-                
-            foreach(var issue in issues)
-                Issues.Add(issue);
+                foreach (var issue in issues)
+                    Issues.Add(issue);
+            });
+            //if(Issues.Count != 0)
+            //    Issues.Clear();
+
+            //foreach(var issue in issues)
+            //    Issues.Add(issue);
 
         }
         catch (Exception ex)
@@ -61,13 +78,21 @@ public partial class IssuesViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToDetails(IssueModel issue)
     {
-        if (issue == null)
-        return;
+        try
+        {
+            if (issue == null)
+                return;
 
-        await Shell.Current.GoToAsync(nameof(DetailsPage), true, new Dictionary<string, object>
+            await Shell.Current.GoToAsync(nameof(DetailsPage), true, new Dictionary<string, object>
         {
             {"Issue", issue }
         });
+        }
+        catch(Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+        }
+        
     }
 
     [RelayCommand]

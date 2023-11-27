@@ -8,58 +8,125 @@
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     ios:Page.UseSafeArea="True"
     Title="Issues"
+    Shell.NavBarIsVisible="False"
     x:DataType="viewmodel:IssuesViewModel">
     <Grid
         ColumnDefinitions="*,*"
         ColumnSpacing="5"
-        RowDefinitions="*,Auto"
+        RowDefinitions="Auto,*,Auto"
         RowSpacing="0">
-        <RefreshView
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" Padding="5"
+      ColumnDefinitions="*,*,*">
+            <Border Grid.Column="0"
+            HorizontalOptions="Start"
+            Style="{StaticResource EllipseBorderStyle}">
+                <Image Source="humberger_menu.png"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+            </Border>
+            <Image Grid.Column="1"
+           Style="{StaticResource ImgBrandStyle}"/>
+            <Border Grid.Column="2"
+            HorizontalOptions="End"
+            Style="{StaticResource EllipseBorderStyle}"
+            Padding="12">
+                <Image Source="user.png"
+               Aspect="AspectFit"
+               HeightRequest="30"
+               WidthRequest="30"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"/>
+            </Border>
+        </Grid>
+        <RefreshView Grid.Row="1"
             Grid.ColumnSpan="2"
             Command="{Binding GetIssuesCommand}"
             IsRefreshing="{Binding IsRefreshing}">
             <ContentView>
-                <CollectionView
-                    ItemsSource="{Binding Issues}"
-                    SelectionMode="None">
-                    <!--<CollectionView.EmptyView>
-                        <StackLayout Padding="100">
-                            <Image
-                                HorizontalOptions="Center"
-                                Source="nodata.png"
-                                HeightRequest="160"
-                                WidthRequest="160"
-                                VerticalOptions="Center" />
-                        </StackLayout>
-                    </CollectionView.EmptyView>
+                <CollectionView ItemsSource="{Binding Issues}"
+        SelectionMode="None"
+        VerticalOptions="StartAndExpand"
+        Margin="-10,0,0,0" EmptyView="No Records Available...">
                     <CollectionView.ItemsLayout>
-                        <GridItemsLayout  Orientation="Horizontal" Span="3"/>
-                    </CollectionView.ItemsLayout>-->
+                        <GridItemsLayout Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:IssueModel">
-                            <Grid Padding="10">
-                                <Frame HeightRequest="125" Style="{StaticResource CardView}">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:IssuesViewModel}}, Path=GoToDetailsCommand}"
-                                            CommandParameter="{Binding .}"/>
-                                    </Frame.GestureRecognizers>
-                                    <Grid Padding="0" ColumnDefinitions="125,*">
-                                        <Image
-                                            Aspect="AspectFill"
-                                            HeightRequest="125"
-                                            Source="{Binding AssigneeAvatar}"
-                                            WidthRequest="125" />
-                                        <VerticalStackLayout
-                                            Grid.Column="1"
-                                            VerticalOptions="Center"
-                                            Padding="10">
-                                            <Label Style="{StaticResource LargeLabel}" Text="{Binding IssueKey}" />
-                                            <Label Style="{StaticResource MediumLabel}" Text="{Binding IssueSummary}" />
-                                        </VerticalStackLayout>
+                            <VerticalStackLayout >
+                                <Border Padding="0"
+    Margin="15,10,5,5"
+    WidthRequest="340"
+    BackgroundColor="{StaticResource Gray100}"
+    Stroke="Gray"
+    StrokeThickness="0"
+    StrokeShape="RoundRectangle 15" >
+                                    <Border.Shadow>
+
+                                        <OnPlatform x:TypeArguments="Shadow">
+                                            <On Platform="Android, WinUI">
+                                                <Shadow Radius="25" Opacity="0.2"></Shadow>
+                                            </On>
+                                            <On Platform="iOS,MacCatalyst">
+                                                <Shadow Radius="5" Opacity="0.2"></Shadow>
+                                            </On>
+                                        </OnPlatform>
+                                    </Border.Shadow>
+                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+                                        <StackLayout Grid.Row="0" Orientation="Horizontal" Padding="10">
+                                            <Border StrokeThickness="0"
+                       
+                        Padding="0"
+                        Margin="-1" HeightRequest="50" WidthRequest="50">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="25"/>
+                                                </Border.StrokeShape>
+                                                <Image Source="{Binding AssigneeAvatar}"
+                            Aspect="AspectFit"
+                            HeightRequest="50"
+                            WidthRequest="50"/>
+                                            </Border>
+
+                                            <StackLayout Orientation="Vertical" Padding="20,0,0,0" Spacing="5">
+                                                <Label Text="{Binding IssueSummary}"
+                            FontSize="25"
+                            FontFamily="PoppinsRegular"
+                            TextColor="{StaticResource Primary}"
+                            HorizontalOptions="StartAndExpand"/>
+                                                <Label Text="{Binding Assignee}"
+                            HorizontalOptions="FillAndExpand"
+                            FontFamily="RalewayMedium"
+                            FontSize="16"
+                            TextColor="Black"
+                                   
+                            LineBreakMode="WordWrap"/>
+                                            </StackLayout>
+                                        </StackLayout>
+
+
+
+                                        <StackLayout Grid.Row="1" Orientation="Horizontal" Padding="10">
+                                            <Image Source="location.png" HeightRequest="20" WidthRequest="20"/>
+                                            <Label  HorizontalOptions="FillAndExpand" Text="Los Angeles" FontSize="14" TextColor="Black" LineBreakMode="NoWrap"  Padding="10,0,10,0"/>
+                                            <Image Source="phone.png" HeightRequest="20" WidthRequest="20"/>
+                                            <Label  HorizontalOptions="FillAndExpand" Text="9988776655" FontSize="14" TextColor="Black" LineBreakMode="NoWrap"  Padding="10,0,0,0"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Row="2" Orientation="Horizontal" Padding="10">
+                                            <Image Source="created.png" HeightRequest="20" WidthRequest="20"/>
+                                            <Label  HorizontalOptions="FillAndExpand" Text="{Binding CreatedDate}" FontSize="14" TextColor="Black" LineBreakMode="NoWrap"  Padding="10,0,10,0"/>
+                                            <Image Source="Target.png" HeightRequest="20" WidthRequest="20"/>
+                                            <Label  HorizontalOptions="FillAndExpand" Text="01/Nov/23 5:00 PM" FontSize="14" TextColor="Black" LineBreakMode="NoWrap"  Padding="10,0,0,0"/>
+                                        </StackLayout>
+
                                     </Grid>
-                                </Frame>
-                            </Grid>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:IssuesViewModel}}, Path=GoToDetailsCommand}"
+CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
+
+                                </Border>
+
+                            </VerticalStackLayout>
+
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -67,7 +134,7 @@
         </RefreshView>
 
         <Button
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"
             Margin="8"
             Command="{Binding GetIssuesCommand}"
@@ -77,7 +144,7 @@
 
         <!--  Add this  -->
         <Button
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             Margin="8"
             Command="{Binding GetClosestIssueCommand}"

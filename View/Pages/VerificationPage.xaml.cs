@@ -31,7 +31,7 @@ public partial class VerificationPage : ContentPage
         if (!isTimerRunning)
         {
             timerStartTime = DateTime.Now;
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Shell.Current.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 UpdateTimer();
                 return isTimerRunning;
@@ -62,7 +62,7 @@ public partial class VerificationPage : ContentPage
         isTimerRunning = false;
     }
 
-    private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+    private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
     {
         
         lblResentCode.IsEnabled = false; 

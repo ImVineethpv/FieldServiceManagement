@@ -6,9 +6,14 @@
     xmlns:local="clr-namespace:FSM">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#FFC107</Color>
-            <Color x:Key="PrimaryDark">#FFA000</Color>
+            <Color x:Key="Primary">#33cccc</Color>
+            <Color x:Key="PrimaryDark">#248f8f</Color>
             <Color x:Key="Accent">#00BCD4</Color>
+            <Color x:Key="Gray100">#F2F2F2</Color>
+            <Color x:Key="Gray200">#d4d9cc</Color>
+            <Color x:Key="Gray400">#4D4D4D</Color>
+            <Color x:Key="Gray500">#4C4C4C</Color>
+            <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
 
             <Color x:Key="LightBackground">#FAF9F8</Color>
             <Color x:Key="DarkBackground">Black</Color>
@@ -69,16 +74,37 @@
                 <Setter Property="Placeholder" Value="Enter mobile number"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryDark}"/>
                 <Setter Property="FontSize" Value="24"/>
                 <Setter Property="Keyboard" Value="Telephone"/>
             </Style>
             <Style TargetType="Entry" x:Key="VerificationEntryStyle">
                 <Setter Property="HorizontalOptions" Value="Center"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryDark}"/>
                 <Setter Property="FontSize" Value="24"/>
                 <Setter Property="Keyboard" Value="Numeric"/>
+            </Style>
+            <Style x:Key="EllipseBorderStyle" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource Gray100Brush}"/>
+                <Setter Property="HeightRequest" Value="45"/>
+                <Setter Property="WidthRequest" Value="45"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Padding" Value="13"/>
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <Ellipse/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Image" x:Key="ImgBrandStyle">
+                <Setter Property="HeightRequest" Value="55"/>
+                <Setter Property="WidthRequest" Value="55"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+                <Setter Property="Source" Value="logo.png"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

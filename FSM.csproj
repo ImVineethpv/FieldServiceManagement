@@ -49,6 +49,42 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\accept.png" />
+	  <None Remove="Resources\Images\add.png" />
+	  <None Remove="Resources\Images\back_arrow.png" />
+	  <None Remove="Resources\Images\created.png" />
+	  <None Remove="Resources\Images\decline.png" />
+	  <None Remove="Resources\Images\downloads.png" />
+	  <None Remove="Resources\Images\eye.png" />
+	  <None Remove="Resources\Images\fav.png" />
+	  <None Remove="Resources\Images\filter.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\humberger.svg" />
+	  <None Remove="Resources\Images\humberger_menu.png" />
+	  <None Remove="Resources\Images\image1.jpg" />
+	  <None Remove="Resources\Images\image2.jpg" />
+	  <None Remove="Resources\Images\image3.jpg" />
+	  <None Remove="Resources\Images\location.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\notification.png" />
+	  <None Remove="Resources\Images\number1black.png" />
+	  <None Remove="Resources\Images\number1gray.png" />
+	  <None Remove="Resources\Images\number2black.png" />
+	  <None Remove="Resources\Images\number2gray.png" />
+	  <None Remove="Resources\Images\phone.png" />
+	  <None Remove="Resources\Images\photo.png" />
+	  <None Remove="Resources\Images\search.png" />
+	  <None Remove="Resources\Images\shadow_1.png" />
+	  <None Remove="Resources\Images\star.png" />
+	  <None Remove="Resources\Images\substract.png" />
+	  <None Remove="Resources\Images\target.png" />
+	  <None Remove="Resources\Images\trash.png" />
+	  <None Remove="Resources\Images\upload.png" />
+	  <None Remove="Resources\Images\user.png" />
+	  <None Remove="Resources\Images\verify.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="GoogleApi" Version="5.2.4" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />

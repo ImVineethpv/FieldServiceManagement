@@ -17,11 +17,11 @@ public partial class IssueDetailsViewModel : BaseViewModel
     {
         try
         {
-            //await map.OpenAsync(Monkey.Latitude, Monkey.Longitude, new MapLaunchOptions
-            //{
-            //    Name = Monkey.Name,
-            //    NavigationMode = NavigationMode.None
-            //});
+            await map.OpenAsync(37.430078, -122.125186, new MapLaunchOptions
+            {
+                Name = Issue.Assignee,
+                NavigationMode = NavigationMode.Driving
+            });
         }
         catch (Exception ex)
         {
