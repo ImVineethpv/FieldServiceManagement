@@ -85,16 +85,23 @@ public partial class VerificationPage : ContentPage
         {
             value2.Focus();
         }
-        if (!string.IsNullOrEmpty(value2.Text) && value1.Text.Length == 1)
+        if (!string.IsNullOrEmpty(value2.Text) && value2.Text.Length == 1)
         {
             value3.Focus();
         }
-        if (!string.IsNullOrEmpty(value3.Text) && value1.Text.Length == 1)
+        if (!string.IsNullOrEmpty(value3.Text) && value3.Text.Length == 1)
         {
             value4.Focus();
         }
-        if (!string.IsNullOrEmpty(value1.Text) && !string.IsNullOrEmpty(value2.Text) && !string.IsNullOrEmpty(value3.Text) && !string.IsNullOrEmpty(value4.Text))
-            btnVerify.IsVisible= true;
+        if (!string.IsNullOrEmpty(value4.Text) && value4.Text.Length == 1)
+        {
+            value4.Focus();
+        }
+
+        if (!string.IsNullOrEmpty(value1.Text) && !string.IsNullOrEmpty(value2.Text) && !string.IsNullOrEmpty(value3.Text) && !string.IsNullOrEmpty(value4.Text))            
+        {
+            btnVerify.IsVisible = true;
+        }
     }
 
     private bool IsNumeric(string text)
@@ -109,13 +116,26 @@ public partial class VerificationPage : ContentPage
 
             if (enteredValue.Length >= 4)
             {
-                await Shell.Current.GoToAsync($"///{nameof(MainPage)}"); 
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+                });
+
+                
+                UnfocusEntries();
             }
         }
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error, Navigation error!", ex.Message, "OK");
         }
+    }
+    private void UnfocusEntries()
+    {
+        value1.Unfocus();
+        value2.Unfocus();
+        value3.Unfocus();
+        value4.Unfocus();
     }
 
 }

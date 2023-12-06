@@ -46,7 +46,10 @@
                 <CollectionView ItemsSource="{Binding Issues}"
         SelectionMode="None"
         VerticalOptions="StartAndExpand"
-        Margin="-10,0,0,0" EmptyView="No Records Available...">
+        Margin="-10,0,0,0" >
+                    <CollectionView.EmptyView>
+                        <Label Text="No Records Available..."/>
+                    </CollectionView.EmptyView>
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
@@ -80,10 +83,15 @@
                                                 <Border.StrokeShape>
                                                     <RoundRectangle CornerRadius="25"/>
                                                 </Border.StrokeShape>
-                                                <Image Source="{Binding AssigneeAvatar}"
+                                                <!--<Image Source="{Binding AssigneeAvatar}"
                             Aspect="AspectFit"
                             HeightRequest="50"
-                            WidthRequest="50"/>
+                            WidthRequest="50"/>-->
+                                                <Image Source="user.png"
+Aspect="AspectFit"
+                                                       
+HeightRequest="50"
+WidthRequest="50"/>
                                             </Border>
 
                                             <StackLayout Orientation="Vertical" Padding="20,0,0,0" Spacing="5">
@@ -120,7 +128,7 @@
                                     </Grid>
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:IssuesViewModel}}, Path=GoToDetailsCommand}"
-CommandParameter="{Binding .}"/>
+CommandParameter="{Binding .}" />
                                     </Border.GestureRecognizers>
 
                                 </Border>

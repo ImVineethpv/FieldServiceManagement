@@ -1,9 +1,13 @@
 ﻿using FSM.Services;
 using FSM.View.Pages;
+using System.Linq;
+using Microsoft.Maui.ApplicationModel;
+using System.Threading;
 
 namespace FSM.ViewModel;
 
 public partial class IssuesViewModel : BaseViewModel
+
 {
     public ObservableCollection<IssueModel> Issues { get; } = new();
     IssueService issueService;
@@ -20,14 +24,14 @@ public partial class IssuesViewModel : BaseViewModel
     [ObservableProperty]
     bool isRefreshing;
 
-    //public event EventHandler PageAppearing;
+    public event EventHandler PageAppearing;
 
-    //// Invoke the event when the page is appearing
-    //public void OnPageAppearing()
-    //{
-    //    PageAppearing?.Invoke(this, EventArgs.Empty);
-    //}
-
+    // Invoke the event when the page is appearing
+    public void OnPageAppearing()
+    {
+        PageAppearing?.Invoke(this, EventArgs.Empty);
+    }
+    
     [RelayCommand]
     public async Task GetIssuesAsync()
     {
@@ -44,22 +48,26 @@ public partial class IssuesViewModel : BaseViewModel
             }
 
             IsBusy = true;
-            var issues = await issueService.GetIssues();
-            //Shell.Current.Dispatcher.Dispatch(() =>
-            //Device.BeginInvokeOnMainThread(() =>
-            MainThread.BeginInvokeOnMainThread(() =>
+            var issues = await Common.GetAllIssues();
+            if (MainThread.IsMainThread)
             {
                 if (Issues.Count != 0)
                     Issues.Clear();
 
                 foreach (var issue in issues)
                     Issues.Add(issue);
-            });
-            //if(Issues.Count != 0)
-            //    Issues.Clear();
+            }
 
-            //foreach(var issue in issues)
-            //    Issues.Add(issue);
+            else
+
+                MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (Issues.Count != 0)
+                    Issues.Clear();
+
+                foreach (var issue in issues)
+                    Issues.Add(issue);
+            });           
 
         }
         catch (Exception ex)
@@ -74,7 +82,26 @@ public partial class IssuesViewModel : BaseViewModel
         }
 
     }
-    
+
+    //[RelayCommand]
+    //async Task GoToDetails(IssueModel issue)
+    //{
+    //    try
+    //    {
+    //        if (issue == null)
+    //            return;
+
+    //        await Shell.Current.GoToAsync(nameof(DetailsPage), true, new Dictionary<string, object>
+    //    {
+    //        {"Issue", issue }
+    //    });
+    //    }
+    //    catch(Exception ex)
+    //    {
+    //        await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+    //    }
+
+    //}
     [RelayCommand]
     async Task GoToDetails(IssueModel issue)
     {
@@ -83,17 +110,20 @@ public partial class IssuesViewModel : BaseViewModel
             if (issue == null)
                 return;
 
-            await Shell.Current.GoToAsync(nameof(DetailsPage), true, new Dictionary<string, object>
-        {
-            {"Issue", issue }
-        });
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await Shell.Current.GoToAsync(nameof(DetailsPage), true, new Dictionary<string, object>
+            {
+                {"Issue", issue }
+            });
+            });
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
         }
-        
     }
+
 
     [RelayCommand]
     async Task GetClosestIssue()

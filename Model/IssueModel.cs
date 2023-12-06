@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace FSM.Model;
+﻿namespace FSM.Model;
 
 public class IssueModel
 {
@@ -36,8 +34,3 @@ public class IssueModel
     public List<CommentModel> Comments { get; set; }
 }
 
-//[JsonSerializable(typeof(List<IssueModel>))]
-//internal sealed partial class IssueModelContext : JsonSerializerContext
-//{
-
-//}
