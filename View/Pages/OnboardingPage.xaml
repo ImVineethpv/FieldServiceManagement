@@ -5,8 +5,12 @@
              x:DataType="vm:OnboardingViewModel"
              x:Class="FSM.View.Pages.OnboardingPage"
              Title="OnboardingPage"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              Shell.NavBarIsVisible="False">
-    <Grid RowDefinitions="*,auto" Padding="0,15">
+    <ContentPage.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="Gray" StatusBarStyle="Default"/>
+    </ContentPage.Behaviors>
+        <Grid RowDefinitions="*,auto" Padding="0,15">
         <CarouselView x:Name="carouselView" ItemsSource="{Binding OnboardingSteps}" IndicatorView="OnBoardingIndicator" Grid.Row="0" PositionChanged="carouselView_PositionChanged">
             <CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="vm:OnBoardingModel">
