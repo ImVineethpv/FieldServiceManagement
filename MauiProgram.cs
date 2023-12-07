@@ -14,11 +14,11 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			});
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
     	builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
@@ -32,7 +32,20 @@ public static class MauiProgram
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddTransient<IssueDetailsViewModel>();
 		builder.Services.AddTransient<DetailsPage>();
-
-		return builder.Build();
+        HandleEntryHandler();      
+        return builder.Build();
 	}
+    public static void HandleEntryHandler()
+    {
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+        {
+#if ANDROID
+            handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
+#elif IOS || MACCATALYST
+            handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+#elif WINDOWS
+            handler.PlatformView.FontWeight = Microsoft.UI.Text.FontWeights.Thin;
+#endif
+        });
+    }
 }
