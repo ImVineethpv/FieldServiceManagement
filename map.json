@@ -1,0 +1,30 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "letter": "G",
+                "color": "red",
+                "rank": "7",
+                "ascii": "71"
+            },
+            "geometry": {
+                "type": "Line",
+                "coordinates": [
+                    [
+                      [
+                        123.61,
+                        -22.14
+                      ],
+                      [
+                        180.00,
+                        -100.14
+                      ]
+                    ]
+                ]
+            }
+        }
+        
+    ]
+}
