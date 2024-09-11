@@ -10,16 +10,12 @@
                 "ascii": "71"
             },
             "geometry": {
-                "type": "Line",
+                "type": "Marker",
                 "coordinates": [
                     [
                       [
                         123.61,
                         -22.14
-                      ],
-                      [
-                        180.00,
-                        -100.14
                       ]
                     ]
                 ]
