@@ -10,7 +10,7 @@
                 "ascii": "71"
             },
             "geometry": {
-                "type": "Marker",
+                "type": "Point",
                 "coordinates": [
                     [
                       [
